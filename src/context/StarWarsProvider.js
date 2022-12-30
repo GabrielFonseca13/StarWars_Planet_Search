@@ -4,6 +4,7 @@ import StarWarsContext from './StarWarsContext';
 
 export default function StarWarsProvider({ children }) {
   const [planetsList, setPlanetsList] = useState([]);
+  const [searchName, setSearchName] = useState('');
 
   const fetchPlanets = async () => {
     const URL = 'https://swapi.dev/api/planets';
@@ -23,8 +24,14 @@ export default function StarWarsProvider({ children }) {
     setPlanetsList(rightPlanets);
   };
 
+  const searchPlanetByName = planetsList
+    .filter((planet) => planet.name.toUpperCase().includes(searchName.toUpperCase()));
+
   const context = {
     planetsList,
+    searchName,
+    searchPlanetByName,
+    setSearchName,
     fetchPlanets,
   };
 
