@@ -2,11 +2,24 @@ import React, { useContext, useEffect } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
 export default function Table() {
-  const { fetchPlanets, planetsList } = useContext(StarWarsContext);
+  const {
+    fetchPlanets,
+    planetsList,
+    searchName,
+    setPlanetsList,
+    data,
+  } = useContext(StarWarsContext);
 
   useEffect(() => {
     fetchPlanets();
-  }, [fetchPlanets]);
+  }, []);
+
+  useEffect(() => {
+    setPlanetsList(
+      data
+        .filter((planet) => planet.name.toUpperCase().includes(searchName.toUpperCase())),
+    );
+  }, [searchName]);
 
   return (
     <div>

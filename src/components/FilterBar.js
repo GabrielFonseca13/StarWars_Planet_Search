@@ -1,34 +1,52 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
 export default function FilterBar() {
   const [columnValue, setColumnValue] = useState('population');
   const [operatorValue, setOperatorValue] = useState('maior que');
   const [numberValue, setNumberValue] = useState(0);
+  const [arrayDeFiltros, setArrayDeFiltros] = useState([]);
 
   const {
     planetsList,
     setPlanetsList,
+    data,
   } = useContext(StarWarsContext);
 
+  useEffect(() => {
+    arrayDeFiltros.forEach((filter) => {
+      if (filter.operador === 'maior que') {
+        const filterBiggerThan = planetsList
+          .filter((planet) => planet[filter.coluna] !== 'unknown'
+            && (Number(planet[filter.coluna]) > Number(filter.numero)));
+        setPlanetsList(filterBiggerThan);
+      } else if (filter.operador === 'menor que') {
+        const filtersmallerThan = planetsList
+          .filter((planet) => planet[filter.coluna] !== 'unknown'
+            && (Number(planet[filter.coluna]) < Number(filter.numero)));
+        setPlanetsList(filtersmallerThan);
+      } else if (filter.operador === 'igual a') {
+        const EqualsTo = planetsList
+          .filter((planet) => planet[filter.coluna] !== 'unknown'
+            && (Number(planet[filter.coluna]) === Number(filter.numero)));
+        setPlanetsList(EqualsTo);
+      }
+    });
+  }, [arrayDeFiltros]);
+
   const filterHandleClick = () => {
-    if (operatorValue === 'maior que') {
-      const filterBiggerThan = planetsList
-        .filter((planet) => planet[columnValue] !== 'unknown'
-          && (Number(planet[columnValue]) > Number(numberValue)));
-      setPlanetsList(filterBiggerThan);
-    } else if (operatorValue === 'menor que') {
-      const filtersmallerThan = planetsList
-        .filter((planet) => planet[columnValue] !== 'unknown'
-          && (Number(planet[columnValue]) < Number(numberValue)));
-      setPlanetsList(filtersmallerThan);
-    } else if (operatorValue === 'igual a') {
-      const EqualsTo = planetsList
-        .filter((planet) => planet[columnValue] !== 'unknown'
-          && (Number(planet[columnValue]) === Number(numberValue)));
-      setPlanetsList(EqualsTo);
-    }
+    const objectTest = {
+      coluna: columnValue,
+      operador: operatorValue,
+      numero: numberValue,
+    };
+    setArrayDeFiltros([...arrayDeFiltros, objectTest]);
   };
+
+  // const deleteAllFilter = () => {
+  //   setArrayDeFiltros([]);
+  //   setPlanetsList(data);
+  // };
 
   return (
     <div>

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import StarWarsContext from './StarWarsContext';
 
 export default function StarWarsProvider({ children }) {
+  const [data, setData] = useState([]);
   const [planetsList, setPlanetsList] = useState([]);
   const [searchName, setSearchName] = useState('');
 
@@ -22,6 +23,7 @@ export default function StarWarsProvider({ children }) {
     // console.log(rightPlanets);
 
     setPlanetsList(rightPlanets);
+    setData(rightPlanets);
   };
 
   const searchPlanetByName = planetsList
@@ -31,6 +33,7 @@ export default function StarWarsProvider({ children }) {
     planetsList,
     searchName,
     searchPlanetByName,
+    data,
     setSearchName,
     setPlanetsList,
     fetchPlanets,
