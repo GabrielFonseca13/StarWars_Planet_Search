@@ -10,7 +10,7 @@ export default function FilterBar() {
   const {
     planetsList,
     setPlanetsList,
-    data,
+    // data,
   } = useContext(StarWarsContext);
 
   useEffect(() => {
