@@ -32,6 +32,7 @@ export default function StarWarsProvider({ children }) {
     searchName,
     searchPlanetByName,
     setSearchName,
+    setPlanetsList,
     fetchPlanets,
   };
 

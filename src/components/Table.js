@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
 export default function Table() {
-  const { fetchPlanets, searchPlanetByName } = useContext(StarWarsContext);
+  const { fetchPlanets, planetsList } = useContext(StarWarsContext);
 
   useEffect(() => {
     fetchPlanets();
@@ -31,7 +31,7 @@ export default function Table() {
         </thead>
         <tbody>
           {
-            searchPlanetByName.map((planet) => (
+            planetsList.map((planet) => (
               <tr key={ planet.url }>
                 <td>{planet.name}</td>
                 <td>{planet.rotation_period}</td>
