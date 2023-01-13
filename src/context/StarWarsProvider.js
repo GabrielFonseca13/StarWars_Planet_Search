@@ -6,6 +6,13 @@ export default function StarWarsProvider({ children }) {
   const [data, setData] = useState([]);
   const [planetsList, setPlanetsList] = useState([]);
   const [searchName, setSearchName] = useState('');
+  const [arrayDeColunas, setArrayDeColunas] = useState([
+    'population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water',
+  ]);
 
   const fetchPlanets = async () => {
     const URL = 'https://swapi.dev/api/planets';
@@ -34,6 +41,8 @@ export default function StarWarsProvider({ children }) {
     searchName,
     searchPlanetByName,
     data,
+    arrayDeColunas,
+    setArrayDeColunas,
     setSearchName,
     setPlanetsList,
     fetchPlanets,

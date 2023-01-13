@@ -6,17 +6,11 @@ export default function FilterBar() {
   const [operatorValue, setOperatorValue] = useState('maior que');
   const [numberValue, setNumberValue] = useState(0);
   const [arrayDeFiltros, setArrayDeFiltros] = useState([]);
-  const [arrayDeColunas, setArrayDeColunas] = useState([
-    'population',
-    'orbital_period',
-    'diameter',
-    'rotation_period',
-    'surface_water',
-  ]);
 
   const {
     planetsList,
     setPlanetsList,
+    arrayDeColunas,
     data,
   } = useContext(StarWarsContext);
 
@@ -41,10 +35,10 @@ export default function FilterBar() {
     });
   }, [arrayDeFiltros]);
 
-  useEffect(() => {
-    console.log(`array de filtros ${arrayDeFiltros}`);
-    console.log(`Array De Filtros ${arrayDeFiltros}`);
-  }, [arrayDeFiltros, arrayDeFiltros]);
+  // useEffect(() => {
+  //   console.log(`array de filtros ${arrayDeFiltros}`);
+  //   console.log(`Array De Filtros ${arrayDeFiltros}`);
+  // }, [arrayDeFiltros, arrayDeFiltros]);
 
   const filterHandleClick = () => {
     const objectTest = {
@@ -60,6 +54,9 @@ export default function FilterBar() {
     setPlanetsList(data);
   };
 
+  const filtraOpcoes = (opcao) => !arrayDeFiltros
+    .find((filtro) => opcao === filtro.coluna);
+
   return (
     <div>
       <label htmlFor="tag-column">
@@ -71,8 +68,8 @@ export default function FilterBar() {
           onChange={ (event) => setColumnValue(event.target.value) }
         >
           {
-            arrayDeColunas.map((column, index) => (
-              <option key={ index } value={ column }>{column}</option>
+            arrayDeColunas.filter(filtraOpcoes).map((column) => (
+              <option key={ column } value={ column }>{column}</option>
             ))
           }
         </select>
