@@ -42,6 +42,14 @@ export default function FilterBar() {
   //   console.log(`Array De Filtros ${arrayDeFiltros}`);
   // }, [arrayDeFiltros, arrayDeFiltros]);
 
+  const removeFiltro = (coluna) => {
+    const colunaRemovida = arrayDeFiltros.filter((option) => coluna !== option.coluna);
+    setArrayDeFiltros(colunaRemovida);
+    arrayDeColunas.push(coluna);
+    setArrayDeColunas(arrayDeColunas);
+    setPlanetsList(data);
+  };
+
   const filterHandleClick = () => {
     const objectTest = {
       coluna: columnValue,
@@ -58,6 +66,7 @@ export default function FilterBar() {
     setArrayDeColunas(arrayDeColunasMatriz);
     setArrayDeFiltros([]);
     setPlanetsList(data);
+    setColumnValue('population');
   };
 
   const filtraOpcoes = (opcao) => !arrayDeFiltros
@@ -118,9 +127,18 @@ export default function FilterBar() {
 
         {
           arrayDeFiltros.map((selected, index) => (
-            <li key={ index }>
+            <li
+              key={ index }
+              data-testid="filter"
+            >
               {`${selected.coluna} ${selected.operador} ${selected.numero} `}
-              <button type="button">🗑️</button>
+              <button
+                type="button"
+                onClick={ () => removeFiltro(selected.coluna) }
+
+              >
+                X
+              </button>
             </li>
           ))
         }
@@ -129,8 +147,9 @@ export default function FilterBar() {
             <button
               type="button"
               onClick={ deleteAllFilter }
+              data-testid="button-remove-filters"
             >
-              Limpar todos os filtros
+              Remover todas filtragens
             </button>
           )
           : null}
