@@ -11,6 +11,8 @@ export default function FilterBar() {
     planetsList,
     setPlanetsList,
     arrayDeColunas,
+    setArrayDeColunas,
+    arrayDeColunasMatriz,
     data,
   } = useContext(StarWarsContext);
 
@@ -47,10 +49,14 @@ export default function FilterBar() {
       numero: numberValue,
     };
     setArrayDeFiltros([...arrayDeFiltros, objectTest]);
+    const filteredOptions = arrayDeColunas.filter((option) => option !== columnValue);
+    setArrayDeColunas(filteredOptions);
+    setColumnValue(filteredOptions[0]);
   };
 
   const deleteAllFilter = () => {
-    setFiltrosSelecionados([]);
+    setArrayDeColunas(arrayDeColunasMatriz);
+    setArrayDeFiltros([]);
     setPlanetsList(data);
   };
 

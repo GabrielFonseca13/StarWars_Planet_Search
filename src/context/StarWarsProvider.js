@@ -13,6 +13,13 @@ export default function StarWarsProvider({ children }) {
     'rotation_period',
     'surface_water',
   ]);
+  const [arrayDeColunasMatriz, setArrayDeColunasMatriz] = useState([
+    'population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water',
+  ]);
 
   const fetchPlanets = async () => {
     const URL = 'https://swapi.dev/api/planets';
@@ -42,6 +49,8 @@ export default function StarWarsProvider({ children }) {
     searchPlanetByName,
     data,
     arrayDeColunas,
+    arrayDeColunasMatriz,
+    setArrayDeColunasMatriz,
     setArrayDeColunas,
     setSearchName,
     setPlanetsList,
