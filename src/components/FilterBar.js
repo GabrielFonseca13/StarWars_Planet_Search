@@ -6,11 +6,18 @@ export default function FilterBar() {
   const [operatorValue, setOperatorValue] = useState('maior que');
   const [numberValue, setNumberValue] = useState(0);
   const [arrayDeFiltros, setArrayDeFiltros] = useState([]);
+  const [arrayDeColunas, setArrayDeColunas] = useState([
+    'population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water',
+  ]);
 
   const {
     planetsList,
     setPlanetsList,
-    // data,
+    data,
   } = useContext(StarWarsContext);
 
   useEffect(() => {
@@ -34,6 +41,11 @@ export default function FilterBar() {
     });
   }, [arrayDeFiltros]);
 
+  useEffect(() => {
+    console.log(`array de filtros ${arrayDeFiltros}`);
+    console.log(`Array De Filtros ${arrayDeFiltros}`);
+  }, [arrayDeFiltros, arrayDeFiltros]);
+
   const filterHandleClick = () => {
     const objectTest = {
       coluna: columnValue,
@@ -43,10 +55,10 @@ export default function FilterBar() {
     setArrayDeFiltros([...arrayDeFiltros, objectTest]);
   };
 
-  // const deleteAllFilter = () => {
-  //   setArrayDeFiltros([]);
-  //   setPlanetsList(data);
-  // };
+  const deleteAllFilter = () => {
+    setFiltrosSelecionados([]);
+    setPlanetsList(data);
+  };
 
   return (
     <div>
@@ -58,11 +70,11 @@ export default function FilterBar() {
           data-testid="column-filter"
           onChange={ (event) => setColumnValue(event.target.value) }
         >
-          <option value="population">population</option>
-          <option value="orbital_period">orbital_period</option>
-          <option value="diameter">diameter</option>
-          <option value="rotation_period">rotation_period</option>
-          <option value="surface_water">surface_water</option>
+          {
+            arrayDeColunas.map((column, index) => (
+              <option key={ index } value={ column }>{column}</option>
+            ))
+          }
         </select>
       </label>
 
@@ -98,6 +110,30 @@ export default function FilterBar() {
       >
         FILTRAR
       </button>
+      <br />
+      <ul>
+
+        {
+          arrayDeFiltros.map((selected, index) => (
+            <li key={ index }>
+              {`${selected.coluna} ${selected.operador} ${selected.numero} `}
+              <button type="button">🗑️</button>
+            </li>
+          ))
+        }
+        { arrayDeFiltros.length !== 0
+          ? (
+            <button
+              type="button"
+              onClick={ deleteAllFilter }
+            >
+              Limpar todos os filtros
+            </button>
+          )
+          : null}
+
+      </ul>
+
     </div>
   );
 }
