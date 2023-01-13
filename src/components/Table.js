@@ -23,7 +23,6 @@ export default function Table() {
 
   return (
     <div>
-      <h4>Table</h4>
       <table>
         <thead>
           <tr>

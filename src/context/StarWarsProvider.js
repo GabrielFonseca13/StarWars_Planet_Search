@@ -34,8 +34,6 @@ export default function StarWarsProvider({ children }) {
       return planet;
     });
 
-    // console.log(rightPlanets);
-
     setPlanetsList(rightPlanets);
     setData(rightPlanets);
   };

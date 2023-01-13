@@ -20,18 +20,15 @@ export default function FilterBar() {
     arrayDeFiltros.forEach((filter) => {
       if (filter.operador === 'maior que') {
         const filterBiggerThan = planetsList
-          .filter((planet) => planet[filter.coluna] !== 'unknown'
-            && (Number(planet[filter.coluna]) > Number(filter.numero)));
+          .filter((planet) => (Number(planet[filter.coluna]) > Number(filter.numero)));
         setPlanetsList(filterBiggerThan);
       } else if (filter.operador === 'menor que') {
         const filtersmallerThan = planetsList
-          .filter((planet) => planet[filter.coluna] !== 'unknown'
-            && (Number(planet[filter.coluna]) < Number(filter.numero)));
+          .filter((planet) => (Number(planet[filter.coluna]) < Number(filter.numero)));
         setPlanetsList(filtersmallerThan);
       } else if (filter.operador === 'igual a') {
         const EqualsTo = planetsList
-          .filter((planet) => planet[filter.coluna] !== 'unknown'
-            && (Number(planet[filter.coluna]) === Number(filter.numero)));
+          .filter((planet) => (Number(planet[filter.coluna]) === Number(filter.numero)));
         setPlanetsList(EqualsTo);
       }
     });
@@ -124,7 +121,6 @@ export default function FilterBar() {
       </button>
       <br />
       <ul>
-
         {
           arrayDeFiltros.map((selected, index) => (
             <li
@@ -153,7 +149,6 @@ export default function FilterBar() {
             </button>
           )
           : null}
-
       </ul>
 
     </div>
