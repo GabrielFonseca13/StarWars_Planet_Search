@@ -26,7 +26,7 @@ export default function FilterBar() {
         const filtersmallerThan = planetsList
           .filter((planet) => (Number(planet[filter.coluna]) < Number(filter.numero)));
         setPlanetsList(filtersmallerThan);
-      } else if (filter.operador === 'igual a') {
+      } else {
         const EqualsTo = planetsList
           .filter((planet) => (Number(planet[filter.coluna]) === Number(filter.numero)));
         setPlanetsList(EqualsTo);
@@ -57,6 +57,7 @@ export default function FilterBar() {
     const filteredOptions = arrayDeColunas.filter((option) => option !== columnValue);
     setArrayDeColunas(filteredOptions);
     setColumnValue(filteredOptions[0]);
+    setNumberValue(0);
   };
 
   const deleteAllFilter = () => {
